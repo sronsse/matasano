@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include <base64.h>
 
 static char index_to_b64(uint8_t b)
@@ -16,6 +17,25 @@ static char index_to_b64(uint8_t b)
 		res = '+';
 	else
 		res = '/';
+	return res;
+}
+
+static uint8_t b64_to_index(char c)
+{
+	uint8_t res = 0;
+
+	/* Map Base64 character to value */
+	if ((c >= 'A') && (c <= 'Z'))
+		res = c - 'A';
+	else if ((c >= 'a') && (c <= 'z'))
+		res = c - 'a' + 26;
+	else if ((c >= '0') && (c <= '9'))
+		res = c - '0' + 52;
+	else if (c == '+')
+		res = 62;
+	else if (c == '/')
+		res = 63;
+
 	return res;
 }
 
@@ -83,5 +103,56 @@ char *base64_encode(uint8_t *data, int len)
 	/* Terminate and return converted string */
 	str[c] = '\0';
 	return str;
+}
+
+uint8_t *base64_decode(char *data, int *len)
+{
+	uint8_t *res;
+	int data_len;
+	uint8_t b[4];
+	int count;
+	int i;
+	char c;
+
+	/* Get data length and allocate result */
+	data_len = strlen(data);
+	res = malloc((data_len / 4) * 3 * sizeof(uint8_t));
+
+	/* Convert Base64 encoding */
+	count = 0;
+	*len = 0;
+	for (i = 0; i < data_len; i++) {
+		/* Get character */
+		c = data[i];
+
+		/* Get value from Base64 */
+		b[count++] = c;
+
+		/* Produce output values if needed */
+		if (count == 4) {
+			/* Output first character */
+			b[0] = b64_to_index(b[0]);
+			b[1] = b64_to_index(b[1]);
+			res[(*len)++] = (b[0] << 2) | (b[1] >> 4);
+
+			/* Output second character if needed */
+			if (b[2] != '=') {
+				b[2] = b64_to_index(b[2]);
+				res[(*len)++] = (b[1] << 4) | (b[2] >> 2);
+			}
+
+			/* Output third character if needed */
+			if (b[3] != '=') {
+				b[3] = b64_to_index(b[3]);
+				res[(*len)++] = (b[2] << 6) | b[3];
+			}
+
+			/* Reset count */
+			count = 0;
+		}
+	}
+
+	/* Return converted result */
+	return res;
 }
 
