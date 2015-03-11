@@ -1,5 +1,6 @@
 bin_PROGRAMS = matasano
-matasano_CFLAGS = -I$(srcdir)/include -Wall -Wextra -Werror
+matasano_CFLAGS = -I$(srcdir)/include -Wall -Wextra -Werror $(SSL_CFLAGS)
+matasano_LDADD = $(SSL_LIBS)
 matasano_SOURCES = main.c \
 	include/base64.h \
 	include/hex.h \

@@ -12,5 +12,9 @@ AM_INIT_AUTOMAKE([subdir-objects -Wall -Werror])
 AM_SILENT_RULES([yes])
 AM_PROG_CC_C_O
 
+PKG_PROG_PKG_CONFIG
+
+PKG_CHECK_MODULES([SSL], [libssl])
+
 AC_OUTPUT
 
