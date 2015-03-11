@@ -1,21 +1,25 @@
 #include <stdlib.h>
 #include <xor.h>
 
-uint8_t *xor_encrypt(uint8_t *hex_bytes, uint8_t *xor_bytes, int length)
+uint8_t *xor_crypt(uint8_t *data, int data_len, uint8_t *key, int key_len)
 {
 	uint8_t *result;
+	int pos;
 	int i;
 
 	/* Validate parameters */
-	if ((hex_bytes == NULL) || (xor_bytes == NULL))
+	if (!data || !key)
 		return NULL;
 
 	/* Allocate result */
-	result = malloc(length * sizeof(uint8_t));
+	result = malloc(data_len * sizeof(uint8_t));
 
 	/* Encrypt input data */
-	for (i = 0; i < length; i++)
-		result[i] = hex_bytes[i] ^ xor_bytes[i];
+	pos = 0;
+	for (i = 0; i < data_len; i++) {
+		result[i] = data[i] ^ key[pos];
+		pos = (pos + 1) % key_len;
+	}
 
 	/* Return encrypted data */
 	return result;

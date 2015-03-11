@@ -10,7 +10,6 @@ void challenge2(char *hex, char *xor)
 	uint8_t *result;
 	int hex_len;
 	int xor_len;
-	int result_len;
 	int i;
 
 	printf("*** Challenge 2: Fixed XOR\n");
@@ -25,14 +24,11 @@ void challenge2(char *hex, char *xor)
 	/* Convert input xor string to byte array */
 	xor_bytes = hex_decode(xor, &xor_len);
 
-	/* Set result length */
-	result_len = hex_len;
-
 	/* Print ASCII xor string representation */
 	printf("ASCII (xor input): %s\n", xor_bytes);
 
 	/* XOR encrypt data */
-	result = xor_encrypt(hex_bytes, xor_bytes, result_len);
+	result = xor_crypt(hex_bytes, hex_len, xor_bytes, xor_len);
 
 	/* Print out result */
 	printf("Result: ");
