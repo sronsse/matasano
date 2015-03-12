@@ -3,6 +3,7 @@ extern void challenge2(char *hex, char *xor);
 extern void challenge3(char *hex);
 extern void challenge4(char *filename);
 extern void challenge5(char *str, char *key);
+extern void challenge6(char *filename);
 
 void set1()
 {
@@ -12,5 +13,6 @@ void set1()
 	challenge3("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736");
 	challenge4("files/4.txt");
 	challenge5("Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal", "ICE");
+	challenge6("files/6.txt");
 }
 
