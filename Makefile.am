@@ -15,6 +15,8 @@ matasano_SOURCES = main.c \
 	set1/challenge7.c \
 	set1/challenge8.c \
 	set1/set1.c \
+	set2/challenge9.c \
+	set2/set2.c \
 	util/base64.c \
 	util/hex.c \
 	util/score.c \
