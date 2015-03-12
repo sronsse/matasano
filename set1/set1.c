@@ -5,6 +5,7 @@ extern void challenge4(char *filename);
 extern void challenge5(char *str, char *key);
 extern void challenge6(char *filename);
 extern void challenge7(char *f, unsigned char *key, int blk_size, int bit_size);
+extern void challenge8(char *filename, int blk_size);
 
 void set1()
 {
@@ -16,5 +17,6 @@ void set1()
 	challenge5("Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal", "ICE");
 	challenge6("files/6.txt");
 	challenge7("files/7.txt", (unsigned char *)"YELLOW SUBMARINE", 16, 128);
+	challenge8("files/8.txt", 16);
 }
 
