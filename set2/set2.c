@@ -3,6 +3,7 @@
 
 extern void challenge9(char *str, int blk_size);
 extern void challenge10(char *f, uint8_t *key, int blk_size, int bit_size);
+extern void challenge11(char *str);
 
 void set2()
 {
@@ -11,5 +12,6 @@ void set2()
 	/* Run all challenges */
 	challenge9("YELLOW SUBMARINE", 20);
 	challenge10("files/10.txt", (uint8_t *)"YELLOW SUBMARINE", 16, 128);
+	challenge11("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 }
 
